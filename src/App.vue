@@ -9,6 +9,7 @@
           :label="item.label"
           :done="item.done"
           :id="item.id"
+          @checkbox-changed="($event) => updateDoneStatus(item.id)"
         ></to-do-item>
       </li>
     </ul>
@@ -41,6 +42,10 @@ export default {
         label: toDoLabel,
         done: false,
       });
+    },
+    updateDoneStatus(toDoId) {
+      const toDoUpdate = this.ToDoItems.find((item) => item.id === toDoId);
+      toDoUpdate.done = !toDoUpdate.done;
     },
   },
   computed: {

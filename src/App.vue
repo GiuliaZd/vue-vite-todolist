@@ -34,8 +34,8 @@ export default {
     };
   },
   methods: {
-    addToDo() {
-      console.log("todo-added");
+    addToDo(toDoLabel) {
+      console.log("todo-added", toDoLabel);
     },
   },
 };

@@ -16,7 +16,7 @@
 export default {
   methods: {
     onSubmit() {
-      this.$emit("todo-added");
+      this.$emit("todo-added", this.label);
     },
   },
   data() {

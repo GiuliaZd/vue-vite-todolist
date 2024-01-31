@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Todo List</h1>
-    <to-do-form></to-do-form>
+    <to-do-form @todo-added="addToDo"> </to-do-form>
     <ul>
       <li v-for="item in ToDoItems" :key="item.id">
         <to-do-item
@@ -32,6 +32,11 @@ export default {
         { id: uniqueId("todo-"), label: "Learn C++", done: false },
       ],
     };
+  },
+  methods: {
+    addToDo() {
+      console.log("todo-added");
+    },
   },
 };
 </script>

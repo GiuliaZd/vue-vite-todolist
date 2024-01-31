@@ -6,7 +6,7 @@
       id="new-todo-input"
       name="new-todo"
       autocomplete="off"
-      v-model="label"
+      v-model.lazy.trim="label"
     />
     <button type="submit">Add new task</button>
   </form>
@@ -16,7 +16,7 @@
 export default {
   methods: {
     onSubmit() {
-      console.log("labelin arvo:", this.label);
+      this.$emit("todo-added");
     },
   },
   data() {

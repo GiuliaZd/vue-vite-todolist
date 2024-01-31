@@ -2,7 +2,8 @@
   <div id="app">
     <h1>Todo List</h1>
     <to-do-form @todo-added="addToDo"> </to-do-form>
-    <ul class="stack-large">
+    <h2 id="list-summary" ref="listSummary" tabindex="-1">{{ listSummary }}</h2>
+    <ul :aria-labelledby="list - summary" class="stack-large">
       <li v-for="item in ToDoItems" :key="item.id">
         <to-do-item
           :label="item.label"
@@ -40,6 +41,14 @@ export default {
         label: toDoLabel,
         done: false,
       });
+    },
+  },
+  computed: {
+    listSummary() {
+      const numberFinishedItems = this.ToDoItems.filter(
+        (item) => item.done
+      ).length;
+      return `${numberFinishedItems} out of ${this.ToDoItems.length} items completed`;
     },
   },
 };

@@ -12,7 +12,7 @@
     </div>
     <to-do-item-edit-form
       v-else
-      :is="id"
+      :id="id"
       :label="label"
       @item-edited="itemEdited"
       @edit-cancelled="editCancelled"

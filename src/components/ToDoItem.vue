@@ -1,15 +1,22 @@
 <template>
-  <div class="stack-small" v-if="!isEditing">
-    <div class="custom-checkbox">
+  <div class="stack-small">
+    <div class="custom-checkbox" v-if="!isEditing">
       <input
         type="checkbox"
         :id="id"
         :checked="isDone"
         class="checkbox"
-        @change="($event) => $emit('checkbox-changed')"
+        @change="() => $emit('checkbox-changed')"
       />
       <label :for="id" class="checkbox-label">{{ label }}</label>
     </div>
+    <to-do-item-edit-form
+      v-else
+      :is="id"
+      :label="label"
+      @item-edited="itemEdited"
+      @edit-cancelled="editCancelled"
+    ></to-do-item-edit-form>
     <div class="btn-group">
       <button
         type="button"
@@ -27,7 +34,9 @@
 </template>
 
 <script>
+import ToDoItemEditForm from "./ToDoItemEditForm.vue";
 export default {
+  components: { ToDoItemEditForm },
   props: {
     label: { required: true, type: String },
     done: { default: false, type: Boolean },
@@ -42,6 +51,12 @@ export default {
     },
     toggleToItemEditForm() {
       this.isEditing = true;
+    },
+    itemEdited(newLabel) {
+      this.$emit("item-edited", newLabel), (this.isEditing = false);
+    },
+    editCancelled() {
+      this.isEditing = false;
     },
   },
 };

@@ -10,6 +10,8 @@
           :done="item.done"
           :id="item.id"
           @checkbox-changed="($event) => updateDoneStatus(item.id)"
+          @item-deleted="($event) => deleteToDo(item.id)"
+          @item-edited="($event) => editToDo(item.id)"
         ></to-do-item>
       </li>
     </ul>
@@ -47,6 +49,15 @@ export default {
     updateDoneStatus(toDoId) {
       const toDoUpdate = this.ToDoItems.find((item) => item.id === toDoId);
       toDoUpdate.done = !toDoUpdate.done;
+    },
+    deleteToDo(toDoId) {
+      const itemIndex = this.ToDoItems.findIndex((item) => item.id === toDoId);
+      this.ToDoItems.splice(itemIndex, 1);
+      this.$refs.listSummary.focus();
+    },
+    editToDo(toDoId, newLabel) {
+      const toDoEdit = this.ToDoItems.find((item) => item.id === toDoId);
+      toDoToEdit.label = newLabel;
     },
   },
   computed: {

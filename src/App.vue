@@ -2,8 +2,8 @@
   <div id="app">
     <h1>Todo List</h1>
     <to-do-form @todo-added="addToDo"> </to-do-form>
-    <h2 id="list-summary" ref="listSummary" tabindex="-1">{{ listSummary }}</h2>
-    <ul :aria-labelledby="list - summary" class="stack-large">
+    <h2 id="list_summary" ref="listSummary" tabindex="-1">{{ listSummary }}</h2>
+    <ul :aria-labelledby="list_summary" class="stack-large">
       <li v-for="item in ToDoItems" :key="item.id">
         <to-do-item
           :label="item.label"
@@ -26,6 +26,7 @@ export default {
   components: { ToDoItem, ToDoForm },
   data() {
     return {
+      list_summary: "",
       ToDoItems: [
         { id: uniqueId("todo-"), label: "Study JS", done: true },
         { id: uniqueId("todo-"), label: "Study TS", done: false },

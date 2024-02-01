@@ -1,13 +1,28 @@
 <template>
-  <div class="custom-checkbox">
-    <input
-      type="checkbox"
-      :id="id"
-      :checked="isDone"
-      class="checkbox"
-      @change="($event) => $emit('checkbox-changed')"
-    />
-    <label :for="id" class="checkbox-label">{{ label }}</label>
+  <div class="stack-small" v-if="!isEditing">
+    <div class="custom-checkbox">
+      <input
+        type="checkbox"
+        :id="id"
+        :checked="isDone"
+        class="checkbox"
+        @change="($event) => $emit('checkbox-changed')"
+      />
+      <label :for="id" class="checkbox-label">{{ label }}</label>
+    </div>
+    <div class="btn-group">
+      <button
+        type="button"
+        class="btn"
+        ref="editButton"
+        @click="toggleToItemEditForm"
+      >
+        Edit<span class="visually hidden">{{ label }}</span>
+      </button>
+      <button type="button" class="btn" ref="deleteButton" @click="deleteToDo">
+        Delete<span class="visually hidden">{{ label }}</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -19,7 +34,15 @@ export default {
     id: { required: true, type: String },
   },
   data() {
-    return { isDone: this.done };
+    return { isDone: this.done, isEditing: false };
+  },
+  methods: {
+    deleteToDo() {
+      this.$emit("item-deleted");
+    },
+    toggleToItemEditForm() {
+      this.isEditing = true;
+    },
   },
 };
 </script>

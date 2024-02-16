@@ -9,9 +9,9 @@
           :label="item.label"
           :done="item.done"
           :id="item.id"
-          @checkbox-changed="($event) => updateDoneStatus(item.id)"
-          @item-deleted="($event) => deleteToDo(item.id)"
-          @item-edited="($event) => editToDo(item.id)"
+          @checkbox-changed="updateDoneStatus(item.id)"
+          @item-deleted="deleteToDo(item.id)"
+          @item-edited="editToDo(item.id, $event)"
         ></to-do-item>
       </li>
     </ul>

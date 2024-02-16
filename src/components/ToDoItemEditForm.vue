@@ -38,7 +38,6 @@ export default {
       newLabel: this.label,
     };
   },
-
   methods: {
     onSubmit() {
       if (this.newLabel && this.newLabel !== this.label) {
